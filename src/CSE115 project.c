@@ -13,7 +13,7 @@ struct Login
     char fname[25];
     char lname[15];
     char username[10];
-    int password,id;
+    int password, id;
 };
 void add(struct book a[], int size);
 void view(struct book b[], int n);
@@ -22,21 +22,19 @@ void search(struct book d[], int x);
 void delete (struct book e[], int y);
 void modify(struct book f[], int z);
 
-
-
 int main()
 {
     char user[50], pass[50];
     int input;
     struct book main[SIZE];
-    //multiple user
+    // multiple user
     int userType;
 
     time_t now;
     time(&now);
-    printf("\n\t\t\t\t\t%s",ctime(&now));
+    printf("\n\t\t\t\t\t%s", ctime(&now));
 
-    //first page or login page
+    // first page or login page
     printf("\n\t\t\t\t Welcome to NSU mart!");
     printf("\n\n\t\t\t\tLogin as:");
     printf("\n\n\t\t\t\t1) Admin:");
@@ -44,15 +42,15 @@ int main()
     printf("\n\n\t\t\t\tEnter your choice:");
     scanf("%d", &userType);
 
-    //for admin
-    if(userType==1)
+    // for admin
+    if (userType == 1)
     {
-    printf("\n\n\t\t\t\tEnter username : ");
-    fflush(stdin);
-    gets(user);
-    printf("\t\t\t\tEnter password : ");
-    fflush(stdin);
-    gets(pass);
+        printf("\n\n\t\t\t\tEnter username : ");
+        fflush(stdin);
+        gets(user);
+        printf("\t\t\t\tEnter password : ");
+        fflush(stdin);
+        gets(pass);
         if (strcmp(user, "admin") == 0)
         {
             if (strcmp(pass, "123") == 0)
@@ -75,24 +73,24 @@ int main()
         system("color E1");
         while (1)
         {
-        printf("\n\t\t\t\t\t%s",ctime(&now));
+            printf("\n\t\t\t\t\t%s", ctime(&now));
 
-        printf("                          ****************************************************\n");
-        printf("                               WELCOME TO THE MAIN MENU OF NSU MART!\n");
-        printf("                          ****************************************************\n\n");
+            printf("                          ****************************************************\n");
+            printf("                               WELCOME TO THE MAIN MENU OF NSU MART!\n");
+            printf("                          ****************************************************\n\n");
 
-        printf("\t\t\t\tYOU ARE LOGGED IN AS AN ADMIN             \n");
-        printf("\t\t\t\t------------------------------------------\n");
-        printf("\t\t\t\t|1.Calculate Bill                        |\n");
-        printf("\t\t\t\t|2.View Books in stock                   |\n");
-        printf("\t\t\t\t|3.Search Book in stock                  |\n");
-        printf("\t\t\t\t|4.Add new book to stock                 |\n");
-        printf("\t\t\t\t|5.Modify information of a book in stock |\n");
-        printf("\t\t\t\t|6.Delete information of a book in stock |\n");
-        printf("\t\t\t\t|0.To Exit Press 0                       |\n");
-        printf("\t\t\t\t------------------------------------------\n");
-        printf("\n\n");
-        printf("\t\t\t\t Enter your choice: ");
+            printf("\t\t\t\tYOU ARE LOGGED IN AS AN ADMIN             \n");
+            printf("\t\t\t\t------------------------------------------\n");
+            printf("\t\t\t\t|1.Calculate Bill                        |\n");
+            printf("\t\t\t\t|2.View Books in stock                   |\n");
+            printf("\t\t\t\t|3.Search Book in stock                  |\n");
+            printf("\t\t\t\t|4.Add new book to stock                 |\n");
+            printf("\t\t\t\t|5.Modify information of a book in stock |\n");
+            printf("\t\t\t\t|6.Delete information of a book in stock |\n");
+            printf("\t\t\t\t|0.To Exit Press 0                       |\n");
+            printf("\t\t\t\t------------------------------------------\n");
+            printf("\n\n");
+            printf("\t\t\t\t Enter your choice: ");
             scanf("%d", &input);
             switch (input)
             {
@@ -115,72 +113,33 @@ int main()
                 delete (main, SIZE);
                 break;
             case 0:
-                    printf("\t\t\t\tThank you. Have a great day!\n");
+                printf("\t\t\t\tThank you. Have a great day!\n");
                 return 0;
             default:
                 printf("Invalid choice!");
             }
         }
     }
-    //for customer
-    if(userType==2)
+    // for customer
+    if (userType == 2)
     {
-    int cho;
-    printf("Press '1' for Register........... \nPress '2' for Login.........\n");
-    scanf("%d",&cho);
-    if(cho == 1)
-    {
-        system("CLS");
-        registe();
-    }
-    else if(cho == 2)
-    {
-        system("CLS");
-        login();
-    }
-    else
-        printf("Incorrect option !!!!!!!!!!!.......Please correct option secleted");
-            system("cls");
-        system("color E1");
-        if(login()){
-
-        while (1)
+        int cho;
+        printf("Press '1' for Register........... \nPress '2' for Login.........\n");
+        scanf("%d", &cho);
+        if (cho == 1)
         {
-        printf("\n\t\t\t\t\t%s",ctime(&now));
-        printf("                          ****************************************************\n");
-        printf("                               WELCOME TO THE MAIN MENU OF NSU MART!\n");
-        printf("                          ****************************************************\n\n");
-
-        printf("\t\t\t\tYOU ARE LOGGED IN AS A CUSTOMER           \n");
-        printf("\t\t\t\t------------------------------------------\n");
-        printf("\t\t\t\t|1.View Books in stock                   |\n");
-        printf("\t\t\t\t|2.Search Book in stock                  |\n");
-        printf("\t\t\t\t|3.Calculate Bill                        |\n");
-        printf("\t\t\t\t|0.To Exit Press 0                       |\n");
-        printf("\t\t\t\t------------------------------------------\n");
-        printf("\n\n");
-        printf("\t\t\t\t Enter your choice: ");
-            scanf("%d", &input);
-            switch (input)
-            {
-            case 1:
-                view(main, SIZE);
-                break;
-            case 2:
-                search(main, SIZE);
-                break;
-            case 3:
-                calculate(main, SIZE);
-                break;
-            case 0:
-                    printf("\t\t\t\tThank you. Have a great day!\n");
-                return 0;
-            default:
-                printf("\t\t\t\tInvalid choice!");
-            }
+            system("CLS");
+            registe();
         }
+        else if (cho == 2)
+        {
+            system("CLS");
+            login();
         }
-
+        else
+        {
+            printf("Incorrect option !!!!!!!!!!!.......Please correct option secleted");
+        }
     }
     else
     {
@@ -189,13 +148,12 @@ int main()
     return 0;
 }
 
-
-//all the functions are here
+// all the functions are here
 registe()
 {
     FILE *log;
-    log  = fopen("dataStoreFile.txt","w");
-    if(log == NULL)
+    log = fopen("users.txt", "w");
+    if (log == NULL)
         printf("File doest not opened,some thing is error\n");
     else
     {
@@ -213,11 +171,11 @@ registe()
         gets(person1.username);
 
         printf("Enter Person ID : ");
-        scanf("%d",&person1.id);
+        scanf("%d", &person1.id);
 
         printf("Enter Person Password : ");
-        scanf("%d",&person1.password);
-        fwrite(&person1,sizeof(person1),1,log);
+        scanf("%d", &person1.password);
+        fwrite(&person1, sizeof(person1), 1, log);
         printf("\nFile data written successful");
 
         fclose(log);
@@ -232,24 +190,64 @@ registe()
 }
 login()
 {
+    int input;
+    time_t now;
+    time(&now);
     char username[10];
     int password;
     FILE *log;
-    log  = fopen("dataStoreFile.txt","r");
-    if(log == NULL)
+    log = fopen("users.txt", "r");
+    if (log == NULL)
         printf("File doest not opened,some thing is error\n");
     else
     {
         struct Login person1;
         printf("UserID : ");
-        scanf("%s",&username);
+        scanf("%s", &username);
         printf("Password : ");
-        scanf("%d",&password);
-        while(fread(&person1,sizeof(person1),1,log))
+        scanf("%d", &password);
+        while (fread(&person1, sizeof(person1), 1, log))
         {
-            if(strcmp(username,person1.username) == 0 && person1.password == password)
+            if (strcmp(username, person1.username) == 0 && person1.password == password)
             {
                 printf("Successfully Login\n");
+                system("cls");
+                system("color E1");
+                while (1)
+                {
+                    printf("\n\t\t\t\t\t%s", ctime(&now));
+                    printf("                          ****************************************************\n");
+                    printf("                               WELCOME TO THE MAIN MENU OF NSU MART!\n");
+                    printf("                          ****************************************************\n\n");
+
+                    printf("\t\t\t\tYOU ARE LOGGED IN AS A CUSTOMER           \n");
+                    printf("\t\t\t\t------------------------------------------\n");
+                    printf("\t\t\t\t|1.View Books in stock                   |\n");
+                    printf("\t\t\t\t|2.Search Book in stock                  |\n");
+                    printf("\t\t\t\t|3.Calculate Bill                        |\n");
+                    printf("\t\t\t\t|0.To Exit Press 0                       |\n");
+                    printf("\t\t\t\t------------------------------------------\n");
+                    printf("\n\n");
+                    printf("\t\t\t\t Enter your choice: ");
+                    scanf("%d", &input);
+                    switch (input)
+                    {
+                    case 1:
+                        view(main, SIZE);
+                        break;
+                    case 2:
+                        search(main, SIZE);
+                        break;
+                    case 3:
+                        calculate(main, SIZE);
+                        break;
+                    case 0:
+                        printf("\t\t\t\tThank you. Have a great day!\n");
+                        return 0;
+                    default:
+                        printf("\t\t\t\tInvalid choice!");
+                    }
+                }
             }
             else
             {
@@ -317,7 +315,8 @@ void add(struct book a[], int size)
             }
             printf("\t\t\t\tEnter code: ");
             fflush(stdin);
-            gets(a[i].code);;
+            gets(a[i].code);
+            ;
             printf("\t\t\t\tEnter price: ");
             scanf("%d", &a[i].price);
             printf("\t\t\t\tStock: ");
