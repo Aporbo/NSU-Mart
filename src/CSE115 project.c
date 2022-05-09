@@ -8,13 +8,14 @@ struct book
     char name[50], stock[20], code[50];
     int price;
 };
-struct Login
+static int i = 0;
+struct web
 {
-    char fname[25];
-    char lname[15];
-    char username[10];
-    int password, id;
-};
+    char name[30], pass[30];
+} w[99];
+int n;
+void login(void);
+void reg(void);
 void add(struct book a[], int size);
 void view(struct book b[], int n);
 void calculate(struct book c[], int m);
@@ -123,22 +124,31 @@ int main()
     // for customer
     if (userType == 2)
     {
-        int cho;
-        printf("Press '1' for Register........... \nPress '2' for Login.........\n");
-        scanf("%d", &cho);
-        if (cho == 1)
+        system("cls");
+        // Menu//
+    XY: // Label for the goto//
+        printf("\n\n\n\t\t\t1. LOGIN\t\t2. REGISTER");
+        printf("\n\n\n\t\t\t\tENTER YOUR CHOICE: ");
+        scanf("%d", &n);
+        switch (n)
         {
-            system("CLS");
-            registe();
-        }
-        else if (cho == 2)
-        {
-            system("CLS");
+        case 1:
+            system("cls");
+
             login();
-        }
-        else
-        {
-            printf("Incorrect option !!!!!!!!!!!.......Please correct option secleted");
+            break;
+        case 2:
+            system("cls");
+
+            reg();
+            break;
+        default:
+            printf("\n\n\t\t\t\tNO MATCH FOUND");
+            printf("\n\n\t\t\tPress Enter to re-Enter the choice");
+            if (getch() == 13)
+                system("cls");
+
+            goto XY;
         }
     }
     else
@@ -149,68 +159,103 @@ int main()
 }
 
 // all the functions are here
-registe()
+void reg()
 {
-    FILE *log;
-    log = fopen("users.txt", "w");
-    if (log == NULL)
-        printf("File doest not opened,some thing is error\n");
-    else
+    int z = 0;
+    FILE *fp;                        // fp is the file pointer//
+    char c, checker[30];             // c is temporary variable, checker is the input string//
+    fp = fopen("Web_reg.txt", "a+"); // File opened for appending//
+    printf("\n\n\t\t\t\tWELCOME TO REGISTER ZONE");
+    printf("\n\t\t\t\t^^^^^^^^^^^^^^^^^^^^^^^^");
+    for (i = 0; i < 100; i++)
     {
-        printf("File create successfully\n");
-        struct Login person1;
-
-        printf("\nEnter Person First name : ");
-        fflush(stdin);
-        gets(person1.fname);
-
-        printf("Enter Person Last name : ");
-        gets(person1.lname);
-
-        printf("Enter Person user name : ");
-        gets(person1.username);
-
-        printf("Enter Person ID : ");
-        scanf("%d", &person1.id);
-
-        printf("Enter Person Password : ");
-        scanf("%d", &person1.password);
-        fwrite(&person1, sizeof(person1), 1, log);
-        printf("\nFile data written successful");
-
-        fclose(log);
-
-        printf("\n\nYour user name is your UserID\n");
-        printf("Now,Login with UserID and Password\n");
-        printf("\nPress any key to continue......................\n");
-        getch();
-        system("CLS");
-        login();
+        printf("\n\n\t\t\t\t  ENTER USERNAME: ");
+        scanf("%s", checker);
+        while (!feof(fp))
+        {
+            fread(&w[i], sizeof(w[i]), 1, fp);
+            // checking whether user exist//
+            if (strcmp(checker, w[i].name) == 0)
+            {
+                printf("\n\n\t\t\tUSERNAME ALREDY EXISTS");
+                system("cls");
+                reg();
+            }
+            else
+            {
+                strcpy(w[i].name, checker);
+                break;
+            }
+        }
+        printf("\n\n\t\t\t\t  DESIRED PASSWORD: ");
+        while ((c = getch()) != 13) // 13 refers to carriage return//
+        {
+            w[i].pass[z++] = c;
+            printf("%c", '*');
+        }
+        fwrite(&w[i], sizeof(w[i]), 1, fp);
+        fclose(fp);
+        printf("\n\n\tPress enter if you agree with Username and Password");
+        if ((c = getch()) == 13)
+        {
+            system("cls");
+            printf("\n\n\t\tYou are successfully registered");
+            printf("\n\n\t\tTry login your account??\n\n\t\t  ");
+            printf("> PRESS 1 FOR YES\n\n\t\t  > PRESS 2 FOR NO\n\n\t\t\t\t");
+            scanf("%d", &n);
+            switch (n)
+            {
+            case 1:
+                system("cls");
+                login();
+                break;
+            case 2:
+                system("cls");
+                printf("\n\n\n\t\t\t\t\tTHANK YOU FOR REGISTERING");
+                break;
+            }
+        }
+        break;
     }
+    getch();
 }
-login()
-{
-    int input;
+void login()
+{int input;
     time_t now;
     time(&now);
-    char username[10];
-    int password;
-    FILE *log;
-    log = fopen("users.txt", "r");
-    if (log == NULL)
-        printf("File doest not opened,some thing is error\n");
-    else
+    FILE *fp;
+    char c, name[30], pass[30];
+    int z = 0;
+    int checku, checkp;             // checkuser name and check password//
+    fp = fopen("Web_reg.txt", "r"); // opening in read mode//
+    printf("\n\n\t\t\t\tWELCOME TO LOG IN ZONE");
+    printf("\n\t\t\t\t^^^^^^^^^^^^^^^^^^^^^^");
+    for (i = 0; i < 1000; i++)
     {
-        struct Login person1;
-        printf("UserID : ");
-        scanf("%s", &username);
-        printf("Password : ");
-        scanf("%d", &password);
-        while (fread(&person1, sizeof(person1), 1, log))
+        printf("\n\n\t\t\t\t  ENTER USERNAME: ");
+        scanf("%s", name);
+        printf("\n\n\t\t\t\t  ENTER PASSWORD: ");
+        while ((c = getch()) != 13)
         {
-            if (strcmp(username, person1.username) == 0 && person1.password == password)
-            {
-                printf("Successfully Login\n");
+            pass[z++] = c;
+            printf("%c", '*');
+        }
+        pass[z] = '\0';
+        while (!feof(fp))
+        {
+            fread(&w[i], sizeof(w[i]), 1, fp);
+            checku = strcmp(name, w[i].name);
+            checkp = strcmp(pass, w[i].pass);
+            if (checku == 0 && checkp == 0)
+                break;
+        }
+        if (checku == 0 && checkp == 0)
+        {
+            system("cls");
+            printf("\n\n\n\t\t\tYOU HAVE LOGGED IN SUCCESSFULLY!!");
+            printf("\n\n\n\t\t\t\tWELCOME, HAVE A NICE DAY");
+
+             printf("Successfully Login\n");
                 system("cls");
                 system("color E1");
                 while (1)
@@ -248,14 +293,23 @@ login()
                         printf("\t\t\t\tInvalid choice!");
                     }
                 }
-            }
-            else
-            {
-                printf("Please !!!!!.......... Enter your correct UserID and Password ");
-            }
         }
-        fclose(log);
+        else if (checku == 0 && checkp != 0)
+        {
+            printf("\n\n\n\t\t\tWRONG PASSWORD!! Not %s??", name);
+            printf("\n\n\t\t\t\t  (Press 'Y' to re-login)");
+            if (getch() == 'y' || getch() == 'Y')
+                login();
+        }
+        else
+        {
+            printf("\n\n\n\t\t\tYou are not a Registered User\n \t\t\tPress enter to register yourself");
+            if (getch() == 13)
+                system("cls");
+            reg();
+        }
     }
+    getch();
 }
 void add(struct book a[], int size)
 {
