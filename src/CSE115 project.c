@@ -9,7 +9,7 @@ struct book
     int price;
 };
 static int i = 0;
-struct web
+struct logInfo
 {
     char name[30], pass[30];
 } w[99];
@@ -28,14 +28,13 @@ int main()
     char user[50], pass[50];
     int input;
     struct book main[SIZE];
-    // multiple user
+
     int userType;
 
     time_t now;
     time(&now);
     printf("\n\t\t\t\t\t%s", ctime(&now));
 
-    // first page or login page
     printf("\n\t\t\t\t Welcome to NSU mart!");
     printf("\n\n\t\t\t\tLogin as:");
     printf("\n\n\t\t\t\t1) Admin:");
@@ -125,7 +124,6 @@ int main()
     if (userType == 2)
     {
         system("cls");
-        // Menu//
 
         printf("\n\n\n\t\t\t1. LOGIN\t\t2. REGISTER");
         printf("\n\n\n\t\t\t\tENTER YOUR CHOICE: ");
@@ -157,9 +155,9 @@ int main()
 void reg()
 {
     int z = 0;
-    FILE *fp;                        // fp is the file pointer//
-    char c, checker[30];             // c is temporary variable, checker is the input string//
-    fp = fopen("Web_reg.txt", "a"); // File opened for appending//
+    FILE *fp;
+    char c, checker[30];
+    fp = fopen("info.txt", "a");
     printf("\n\n\t\t\t\tWELCOME TO REGISTER ZONE");
     printf("\n\t\t\t\t^^^^^^^^^^^^^^^^^^^^^^^^");
     for (i = 0; i < 100; i++)
@@ -169,7 +167,7 @@ void reg()
         while (!feof(fp))
         {
             fread(&w[i], sizeof(w[i]), 1, fp);
-            // checking whether user exist//
+
             if (strcmp(checker, w[i].name) == 0)
             {
                 printf("\n\n\t\t\tUSERNAME ALREDY EXISTS");
@@ -183,7 +181,7 @@ void reg()
             }
         }
         printf("\n\n\t\t\t\t  DESIRED PASSWORD: ");
-        while ((c = getch()) != 13) // 13 refers to carriage return//
+        while ((c = getch()) != 13)
         {
             w[i].pass[z++] = c;
             printf("%c", '*');
@@ -224,8 +222,8 @@ void login()
     int z = 0;
     int checku, checkp;
     struct book main[SIZE];
-               // checkuser name and check password//
-    fp = fopen("Web_reg.txt", "r"); // opening in read mode//
+
+    fp = fopen("info.txt", "r");
     printf("\n\n\t\t\t\tWELCOME TO LOG IN ZONE");
     printf("\n\t\t\t\t^^^^^^^^^^^^^^^^^^^^^^");
     for (i = 0; i < 1000; i++)
@@ -296,11 +294,13 @@ void login()
         else
         {
             printf("\n\n\n\t\t\t WRONG ENTRY!!\n \t\t\tPress enter to try again....\n \t\t\t Or press any other key to register yourself.");
-            if (getch() == 13){
+            if (getch() == 13)
+            {
                 system("cls");
-            login();
+                login();
             }
-            else{
+            else
+            {
                 system("cls");
                 reg();
             }
