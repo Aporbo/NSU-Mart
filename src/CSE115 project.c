@@ -173,7 +173,7 @@ void reg()
         scanf("%s", checker);
         while (!feof(fp))
         {
-            fread(&w[i], sizeof(w[i]), 2, fp);
+            fread(&w[i], sizeof(w[i]), 1, fp);
             // checking whether user exist//
             if (strcmp(checker, w[i].name) == 0)
             {
@@ -297,19 +297,18 @@ void login()
                 }
             }
         }
-        else if (checku == 0 && checkp != 0)
-        {
-            printf("\n\n\n\t\t\tWRONG PASSWORD!! Not %s??", name);
-            printf("\n\n\t\t\t\t  (Press 'Y' to re-login)");
-            if (getch() == 'y' || getch() == 'Y')
-                login();
-        }
+
         else
         {
-            printf("\n\n\n\t\t\tYou are not a Registered User\n \t\t\tPress enter to register yourself");
-            if (getch() == 13)
+            printf("\n\n\n\t\t\t WRONG ENTRY!!\n \t\t\tPress enter to try again....\n \t\t\t Or press any other key to register yourself.");
+            if (getch() == 13){
                 system("cls");
-            reg();
+            login();
+            }
+            else{
+                system("cls");
+                reg();
+            }
         }
     }
     getch();
