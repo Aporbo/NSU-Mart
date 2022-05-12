@@ -126,7 +126,7 @@ int main()
     {
         system("cls");
         // Menu//
-    XY: // Label for the goto//
+
         printf("\n\n\n\t\t\t1. LOGIN\t\t2. REGISTER");
         printf("\n\n\n\t\t\t\tENTER YOUR CHOICE: ");
         scanf("%d", &n);
@@ -143,12 +143,7 @@ int main()
             reg();
             break;
         default:
-            printf("\n\n\t\t\t\tNO MATCH FOUND");
-            printf("\n\n\t\t\tPress Enter to re-Enter the choice");
-            if (getch() == 13)
-                system("cls");
-
-            goto XY;
+            printf("\n\n\t\t\t\tNO MATCH FOUND\n\t\t\t\t Please try again letter");
         }
     }
     else
