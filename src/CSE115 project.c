@@ -220,13 +220,16 @@ void reg()
     getch();
 }
 void login()
-{int input;
+{
+    int input;
     time_t now;
     time(&now);
     FILE *fp;
     char c, name[30], pass[30];
     int z = 0;
-    int checku, checkp;             // checkuser name and check password//
+    int checku, checkp;
+    struct book main[SIZE];
+               // checkuser name and check password//
     fp = fopen("Web_reg.txt", "r"); // opening in read mode//
     printf("\n\n\t\t\t\tWELCOME TO LOG IN ZONE");
     printf("\n\t\t\t\t^^^^^^^^^^^^^^^^^^^^^^");
@@ -255,44 +258,44 @@ void login()
             printf("\n\n\n\t\t\tYOU HAVE LOGGED IN SUCCESSFULLY!!");
             printf("\n\n\n\t\t\t\tWELCOME, HAVE A NICE DAY");
 
-             printf("Successfully Login\n");
-                system("cls");
-                system("color E1");
-                while (1)
-                {
-                    printf("\n\t\t\t\t\t%s", ctime(&now));
-                    printf("                          ****************************************************\n");
-                    printf("                               WELCOME TO THE MAIN MENU OF NSU MART!\n");
-                    printf("                          ****************************************************\n\n");
+            printf("Successfully Login\n");
+            system("cls");
+            system("color E1");
+            while (1)
+            {
+                printf("\n\t\t\t\t\t%s", ctime(&now));
+                printf("                          ****************************************************\n");
+                printf("                               WELCOME TO THE MAIN MENU OF NSU MART!\n");
+                printf("                          ****************************************************\n\n");
 
-                    printf("\t\t\t\tYOU ARE LOGGED IN AS A CUSTOMER           \n");
-                    printf("\t\t\t\t------------------------------------------\n");
-                    printf("\t\t\t\t|1.View Books in stock                   |\n");
-                    printf("\t\t\t\t|2.Search Book in stock                  |\n");
-                    printf("\t\t\t\t|3.Calculate Bill                        |\n");
-                    printf("\t\t\t\t|0.To Exit Press 0                       |\n");
-                    printf("\t\t\t\t------------------------------------------\n");
-                    printf("\n\n");
-                    printf("\t\t\t\t Enter your choice: ");
-                    scanf("%d", &input);
-                    switch (input)
-                    {
-                    case 1:
-                        view(main, SIZE);
-                        break;
-                    case 2:
-                        search(main, SIZE);
-                        break;
-                    case 3:
-                        calculate(main, SIZE);
-                        break;
-                    case 0:
-                        printf("\t\t\t\tThank you. Have a great day!\n");
-                        return 0;
-                    default:
-                        printf("\t\t\t\tInvalid choice!");
-                    }
+                printf("\t\t\t\tYOU ARE LOGGED IN AS A CUSTOMER           \n");
+                printf("\t\t\t\t------------------------------------------\n");
+                printf("\t\t\t\t|1.View Books in stock                   |\n");
+                printf("\t\t\t\t|2.Search Book in stock                  |\n");
+                printf("\t\t\t\t|3.Calculate Bill                        |\n");
+                printf("\t\t\t\t|0.To Exit Press 0                       |\n");
+                printf("\t\t\t\t------------------------------------------\n");
+                printf("\n\n");
+                printf("\t\t\t\t Enter your choice: ");
+                scanf("%d", &input);
+                switch (input)
+                {
+                case 1:
+                    view(main, SIZE);
+                    break;
+                case 2:
+                    search(main, SIZE);
+                    break;
+                case 3:
+                    calculate(main, SIZE);
+                    break;
+                case 0:
+                    printf("\t\t\t\tThank you. Have a great day!\n");
+                    return 0;
+                default:
+                    printf("\t\t\t\tInvalid choice!");
                 }
+            }
         }
         else if (checku == 0 && checkp != 0)
         {
