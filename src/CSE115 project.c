@@ -164,7 +164,7 @@ void reg()
     int z = 0;
     FILE *fp;                        // fp is the file pointer//
     char c, checker[30];             // c is temporary variable, checker is the input string//
-    fp = fopen("Web_reg.txt", "a+"); // File opened for appending//
+    fp = fopen("Web_reg.txt", "a"); // File opened for appending//
     printf("\n\n\t\t\t\tWELCOME TO REGISTER ZONE");
     printf("\n\t\t\t\t^^^^^^^^^^^^^^^^^^^^^^^^");
     for (i = 0; i < 100; i++)
@@ -173,7 +173,7 @@ void reg()
         scanf("%s", checker);
         while (!feof(fp))
         {
-            fread(&w[i], sizeof(w[i]), 1, fp);
+            fread(&w[i], sizeof(w[i]), 2, fp);
             // checking whether user exist//
             if (strcmp(checker, w[i].name) == 0)
             {
